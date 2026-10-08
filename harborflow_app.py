@@ -1,83 +1,73 @@
-# Started Task 5 ( Checling Van Capacity )
-
-# Created a function named Check Van Capacity
-
-def check_van_capacity():
-    capacity = float(input("What is Van Capacity in KG: "))
-    weights = input("Enter parcel weights in KG: ").split(",")
-
-    remaining_capacity = capacity
-    accepted_count = 0
-    loaded_weight = 0
-
-# Used For Lopp and If-Else statement
-
-    for i in range(len(weights)):
-        weight = float(weights[i])
-
-        if weight <= remaining_capacity:
-            print(f"Parcel {i + 1}: Accepted")
-            accepted_count = accepted_count + 1
-            loaded_weight = loaded_weight + weight
-            remaining_capacity = remaining_capacity - weight
-        else:
-            print(f"Parcel {i + 1}: Rejected")
-
-    print(f"Accepted Parcels: {accepted_count}")
-    print(f"Loaded Weight: {loaded_weight:.2f} KG")
-    print(f"Remaining Capacity: {remaining_capacity:.2f} KG")
+# Task1
+def task_2_function():
+    handle_validate_reference()
 
 
-# Started Task 6 ( Classify Service Performance )
+def task_3_mission():
+    # Placeholder for task 3
+    print("Running: Calculate delivery quote")
 
-# Created a function named Classify Performance
 
-def classify_performance(promised, actual, damaged):
-    delay = actual - promised
+def task_4_function():
+    # Placeholder for task 4
+    print("Running: Consolidate parcel labels")
 
-# Using If-Else Statements 
 
-    if damaged > 0:
-        status = "SERVICE FAILURE"
-    elif delay <= 0:
-        status = "ON TIME"
-    elif delay <= 15:
-        status = "MINOR DELAY"
+def task_5_function():
+    # Placeholder for task 5
+    print("Running: Check van capacity")
+
+
+def task_6_function():
+    # Placeholder for task 6
+    print("Running: Classify service performance")
+
+
+def task_7_function():
+    # Placeholder for task 7
+    print("Running: Produce weekly dispatch report")
+
+ # Task2
+
+
+def validate_reference(reference):
+    normalized = reference.strip().upper()
+
+    # Rule 1: must be exactly 12 characters
+    if len(normalized) != 12:
+        return ""
+
+    # Rule 2: hyphens must be in the right spots
+    if normalized[3] != "-" or normalized[7] != "-":
+        return ""
+
+    prefix = normalized[0:3]
+    customer_code = normalized[4:7]
+    shipment_number = normalized[8:12]
+
+    # Rule 3: prefix must be HFL
+    if prefix != "HFL":
+        return ""
+
+    # Rule 4: customer code must be 3 letters
+    if not customer_code.isalpha():
+        return ""
+
+    # Rule 5: shipment number must be 4 digits
+    if not shipment_number.isdigit():
+        return ""
+
+    return normalized
+
+
+def handle_validate_reference():
+    reference = input("Booking reference: ")
+    result = validate_reference(reference)
+
+    if result != "":
+        print("Valid reference:", result)
     else:
-        status = "MAJOR DELAY"
-
-    return delay, status
-
-# Created another function named Service Performance 
-
-def service_performance():
-    promised = int(input("Promised minutes: "))
-    actual = int(input("Actual minutes: "))
-    damaged = int(input("Damaged parcels: "))
-
-    delay, status = classify_performance(promised, actual, damaged)
-
-    print(f"Delay: {delay} minutes")
-    print(f"Service status: {status}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print("Invalid booking reference.")
 
 
 """HarborFlow Assignment 1 starter file.
@@ -88,9 +78,35 @@ entry point so the file can be run with: python harborflow_app.py
 
 
 def main():
-    """Run the HarborFlow Dispatch Console."""
-    # TODO: implement the persistent menu and dispatch to task functions.
-    pass
+    # Task 1: Build the dispatch menu
+    while True:
+        print("HARBORFLOW DISPATCH CONSOLE")
+        print("1. Close console")
+        print("2. Validate booking reference")
+        print("3. Calculate delivery quote")
+        print("4. Consolidate parcel labels")
+        print("5. Check van capacity")
+        print("6. Classify service performance")
+        print("7. Produce weekly dispatch report")
+        choice = int(input("Select service: "))
+
+        if choice == 1:
+            print("Console closed. Dispatch data remains safe.")
+            break  # Ends the while loop, which ends the program
+        elif choice == 2:
+            task_2_function()
+        elif choice == 3:
+            task_3_mission()
+        elif choice == 4:
+            task_4_function()
+        elif choice == 5:
+            task_5_function()
+        elif choice == 6:
+            task_6_function()
+        elif choice == 7:
+            task_7_function()
+        else:
+            print("Error - Select a service from 1 to 8.")
 
 
 if __name__ == "__main__":
